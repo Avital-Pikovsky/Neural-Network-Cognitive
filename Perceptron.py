@@ -1,9 +1,15 @@
 import numpy as np
 import pandas as pd
+import random
 
 
 #reading the csv file
-data = pd.read_csv("wpbc.csv", header = None)
+data = pd.read_csv("wpbc.data", header = None)
+
+for i in range(0,data.shape[0]):
+    if data.iloc[i,34] == '?':
+         data.iloc[i,34] = 0
+
 for i in range(0,data.shape[0]):
     if data.iloc[i,34] == '?':
          data.iloc[i,34] = 0
@@ -46,7 +52,7 @@ class Perceptron(object):
         for _ in range(self.threshold):
             for inputs, label in zip(training_inputs, labels):
                 prediction = self.predict(inputs)
-                self.weights[1:] = self.weights[1:]+ (self.learning_rate * (label - prediction) * inputs)
+                self.weights[1:] = self.weights[1: ]+ (self.learning_rate * (label - prediction) * inputs)
                 self.weights[0] = self.weights[0] + (self.learning_rate * (label - prediction))
 
 Perceptron = Perceptron(32)
@@ -62,7 +68,6 @@ for line in range(0, X_test.shape[0]):
         rights += 1
     else:
         wrongs += 1
-    print(line,"line")
     if(predict_line == 1 == (Y_test[line,:])):
         True_positive += 1
     if(predict_line == 0 == (Y_test[line,:])):
