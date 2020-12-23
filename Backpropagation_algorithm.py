@@ -213,13 +213,13 @@ class NN:
 
 
 # create a network with two input, two hidden, and one output nodes
-NN = NN(32, 1, 1)
+NN = NN(32, 5, 1)
 
 start = timeit.default_timer()
 NN.train(X_train,Y_train)
 end = timeit.default_timer()
 
-print("Time of train: ",end - start)
+print("Time of train: ",end - start, " sec")
 
 print("Result of the train data:")
 NN.test(X_train,Y_train)
