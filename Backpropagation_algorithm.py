@@ -5,6 +5,7 @@ import random
 import numpy as np
 import pandas as pd
 import timeit
+import matplotlib.pyplot as plt
 
 #reading the csv file
 data = pd.read_csv("wpbc.data", header = None)
@@ -200,6 +201,7 @@ class NN:
     def train(self, x_part,y_part, iterations=1000, N=0.001, M=0.1):
         # N: learning rate
         # M: momentum factor
+        errors = []
         for i in range(iterations):
             error = 0.0
             for p in range(0,x_part.shape[0]):
@@ -207,10 +209,15 @@ class NN:
                 target = y_part[p]
                 self.update(inputs)
                 error = error + self.backPropagate(target, N, M)
+            errors.append(error)
             # if i % 100 == 0:
                 # print('error %-.5f' % error)
-
-
+        plt.title('Back propagation')
+        plt.xlabel('Epochs')
+        plt.ylabel('Mean square error')
+        plt.plot(range(iterations),errors)
+        plt.show()   
+        print("plt")
 
 # create a network with two input, two hidden, and one output nodes
 NN = NN(32, 5, 1)

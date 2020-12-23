@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import timeit
+import matplotlib.pyplot as plt
 
 #reading the csv file
 data = pd.read_csv("wpbc.data", header = None)
@@ -71,7 +72,12 @@ class Adaline(object):
 
             cost = (errors**2).sum() / 2.0
             self.cost_.append(cost)
-
+        
+        plt.plot(self.cost_)
+        plt.title('Adaline simulation on WPBC')
+        plt.xlabel('Iterations')
+        plt.ylabel('Mean squared error')
+        plt.show()
         return self
 
     def net_input(self, X):

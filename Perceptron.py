@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import timeit
+import matplotlib.pyplot as plt
 
 #reading the csv file
 data = pd.read_csv("wpbc.data", header = None)
@@ -60,11 +61,23 @@ class Perceptron(object):
         return activation
 
     def train(self, training_inputs, labels):
+        errors = []
+
         for _ in range(self.threshold):
+            error = 0.0
+            cost = 0.0
             for inputs, label in zip(training_inputs, labels):
                 prediction = self.predict(inputs)
+                error =  (label - prediction) 
+                cost = cost + error
                 self.weights[1:] = self.weights[1: ]+ (self.learning_rate * (label - prediction) * inputs)
                 self.weights[0] = self.weights[0] + (self.learning_rate * (label - prediction))
+            errors.append(cost)
+        plt.plot(errors)
+        plt.title('Adaline simulation on WPBC')
+        plt.xlabel('Iterations')
+        plt.ylabel('Mean squared error')
+       # plt.show()
 
 Perceptron = Perceptron(32)
 
@@ -72,7 +85,7 @@ start = timeit.default_timer()
 Perceptron.train(X_train,Y_train)
 end = timeit.default_timer()
 
-print("Time of train: ",end - start)
+print("Time of train: ",end - start,"second")
 
 True_positive = 0
 False_positive = 0
