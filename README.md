@@ -1,4 +1,8 @@
-# NEURAL NETWORK COGNITIVE PROJECT:
+## NEURAL NETWORK COGNITIVE PROJECT:
+
+This work will require us to download a "real" data set relating to Breast Cancer recurrence prediction.
+The data set has values taken from a mass extracted from a patient suffering from breast cancer and then indicates whether or not the cancer recurs and how long it takes.
+
 ## Data preparation:
 We read the data into a variable.
 
